@@ -2,7 +2,7 @@
 #include "QE.hpp"
 using namespace std;
 
-struct Student {
+struct Student { 
 	int score = 0;
 	string name;
 };
@@ -17,16 +17,16 @@ void PrintTable(struct Student* students,int size) {
 
 struct Student* GetAnswers(struct Student* students,int* size) {
 
-	string name;
+	string name; 
 	string nameSecond;
 	Student* studentsTmp = new Student[*size];
-	float studentAnswer;
+	float studentAnswer; 
 	bool IsRight = false;
 	bool IsEx = false;
-	Poly poly = GetPoly(); //заменить
-	Answer answer = QuadraticEquation(poly);
-	cin >> studentAnswer;
-	if(studentAnswer == 0 && answer.x1 != studentAnswer){
+	Poly poly = GetPoly(); //Gets polinomial coefficients
+	Answer answer = QuadraticEquation(poly); // gets answers
+	cin >> studentAnswer; // getting student answer
+	if(studentAnswer == 0 && answer.x1 != studentAnswer){ //checking if student answer is correct
 		IsRight = false;
 	}
 	else if (studentAnswer == answer.x1) {
@@ -51,10 +51,10 @@ struct Student* GetAnswers(struct Student* students,int* size) {
 		IsRight = false;
 	}
 
-	cin >> name;
+	cin >> name; //getting student name
 	cin >> nameSecond;
 
-	for (int i = 0; i < *size; i++) {
+	for (int i = 0; i < *size; i++) { //if this student already in array +1 to his score
 		if (students[i].name == name + " " + nameSecond) {
 			if (IsRight) {
 				students[i].score++;
@@ -63,7 +63,7 @@ struct Student* GetAnswers(struct Student* students,int* size) {
 		}
 	}
 
-	if (!IsEx) {
+	if (!IsEx) { //if student not in array, add him and his score = 1
 		(*size)++;
 		studentsTmp = new Student[*size];
 		studentsTmp[*size - 1].name = name + " " + nameSecond;
@@ -81,12 +81,12 @@ struct Student* GetAnswers(struct Student* students,int* size) {
 
 }
 
-void Offset() {
-	struct Student* students;
+void Offset() { // just called from main
+	struct Student* students; //creating array of students
 	int size = 0;
 	students = new Student[size];
 	char c;
-	while (1) {
+	while (1) { //ends when all students checked
 		students = GetAnswers(students, &size);
 		c = getchar();
 		if (c != '\n' || c == ' ')
